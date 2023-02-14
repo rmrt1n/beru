@@ -1,9 +1,15 @@
 <script>
 	import '../../app.postcss';
 	import Navbar from '$lib/components/dashboard/Navbar.svelte';
+
+	/** @type {import('./$types').LayoutData} */
+	export let data;
 </script>
 
 <Navbar />
+{#if data}
+	{data.session?.user.email}
+{/if}
 <main class="bg-stone-100 min-h-screen">
 	<div class="mx-auto lg:container lg:px-16 xl:px-20 p-4 lg:py-8">
 		<slot />

@@ -3,7 +3,7 @@
 </script>
 
 <header>
-	<a href="/dashboard">Sign in</a>
+	<a href="/sign-in">Sign in</a>
 	<a href="/dashboard">Get started</a>
 </header>
 <main>
