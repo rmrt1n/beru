@@ -7,11 +7,8 @@
 </script>
 
 <Navbar />
-{#if data}
-	{data.session?.user.email}
-{/if}
 <main class="bg-stone-100 min-h-screen">
-	<div class="mx-auto lg:container lg:px-16 xl:px-20 p-4 lg:py-8">
+	<div class="mx-auto lg:container lg:px-16 xl:px-20 p-4 md:p-8">
 		<slot />
 	</div>
 </main>

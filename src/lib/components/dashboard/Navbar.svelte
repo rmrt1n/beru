@@ -19,7 +19,7 @@
 	<div class="mx-auto flex items-center justify-between p-4 lg:container lg:px-16 xl:px-20">
 		<a href="/dashboard" class="font-bold text-xl">Beru</a>
 		<nav class="flex gap-3">
-			<button class="px-4 py-1 border rounded-md shadow-sm flex items-center gap-2">
+			<button class="px-4 py-1 border rounded shadow-sm flex items-center gap-2">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -40,7 +40,7 @@
 			<div class="relative">
 				<button
 					on:click={() => (isProfileOpen = !isProfileOpen)}
-					class="px-4 py-1 border rounded-md shadow-sm flex items-center gap-2"
+					class="px-4 py-1 border rounded shadow-sm flex items-center gap-2"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@
 				</button>
 				<!-- Dropdown menu -->
 				<div
-					class="z-10 absolute bg-white divide-y divide-gray-100 rounded-md shadow-md w-44"
+					class="z-10 absolute right-0 top-[calc(100%+.25rem)] bg-white divide-y divide-gray-100 border rounded-md shadow-md w-44"
 					class:hidden={!isProfileOpen}
 				>
 					<ul class="py-2 text-sm" on:click={() => (isProfileOpen = false)}>

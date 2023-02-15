@@ -1,13 +1,20 @@
 <script>
+	import ComponentsTable from '$lib/components/dashboard/ComponentsTable.svelte';
+	import ELiabilityStatement from '$lib/components/dashboard/ELiabilityStatement.svelte';
+
 	/** @type {import('./$types').PageData} */
 	export let data;
-	const { product } = data;
+	const { product, emissions } = data;
+
+	let show = false;
 </script>
 
 <div class="space-y-8">
 	<h1 class="text-2xl font-bold">{product.name}</h1>
-	<div class="flex flex-col lg:flex-row gap-8">
-		<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md" />
+	<div class="flex flex-col lg:flex-row gap-6">
+		<div class="bg-white border rounded-md shadow-sm p-4 w-full">
+			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md" />
+		</div>
 		<div class="bg-white border rounded-md shadow-sm p-4 space-y-4 w-full">
 			<h3 class="text-lg font-bold">Product details</h3>
 
@@ -21,8 +28,8 @@
 				<p>Batch number: {product.batchNumber}</p>
 			</div>
 
-			<div class="flex gap-4">
-				<button class="w-full px-4 py-1 border rounded-md shadow-sm flex items-center gap-2">
+			<div class="flex flex-col md:flex-row gap-4">
+				<button on:click={() => show = !show} class="w-full px-4 py-1 border rounded-md shadow-sm flex items-center gap-2 text-left">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -66,5 +73,10 @@
 	</div>
 	<h2 class="text-xl font-bold">Product insights</h2>
 	<h2 class="text-xl font-bold">Components breakdown</h2>
+	<div class="bg-white border rounded-md shadow-sm p-6 space-y-4 w-full">
+		<ComponentsTable components={product.components} {emissions} />
+	</div>
 	<h2 class="text-xl font-bold">Compare previous batches</h2>
 </div>
+
+<ELiabilityStatement bind:show {product} {emissions} />

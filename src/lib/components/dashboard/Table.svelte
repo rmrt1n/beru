@@ -103,64 +103,66 @@
 	</div>
 </div>
 
-<table class="w-full border rounded-md shadow-sm">
-	<thead class="bg-stone-200 w-full">
-		{#each $table.getHeaderGroups() as headerGroup}
-			<tr>
-				{#each headerGroup.headers as header}
-					<th class="px-4 py-2 text-left">
-						{#if !header.isPlaceholder}
-							<svelte:component
-								this={flexRender(header.column.columnDef.header, header.getContext())}
-							/>
-						{/if}
-					</th>
-				{/each}
-				<th class="px-4 py-2" />
-			</tr>
-		{/each}
-	</thead>
-	<tbody>
-		{#each $table.getRowModel().rows as row}
-			<tr class="hover:bg-stone-100">
-				{#each row.getVisibleCells() as cell}
-					<td class="px-4 py-2 text-left">
-						{#if cell.column.id === 'name' && products[row.index].thumbnail}
-							<img
-								src={products[row.index].thumbnail}
-								alt="product thumbnail"
-								class="w-12 h-12 rounded-full border-2 inline-block mr-2 object-contain"
-							/>
-						{/if}
-						<svelte:component this={flexRender(cell.column.columnDef.cell, cell.getContext())} />
-					</td>
-				{/each}
-				<td class="px-4 py-2">
-					{#if isDemoProduct(row.getValue('productId'))}
-						<a
-							href={`/dashboard/products/${row.getValue('productId')}`}
-							class="inline-block rounded border border-transparent hover:border-gray-200 hover:shadow-sm p-1"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="w-5 h-5"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+<div class="w-full border rounded shadow-sm overflow-auto">
+	<table class="w-full">
+		<thead class="bg-stone-200 w-full">
+			{#each $table.getHeaderGroups() as headerGroup}
+				<tr>
+					{#each headerGroup.headers as header}
+						<th class="px-4 py-2 text-left">
+							{#if !header.isPlaceholder}
+								<svelte:component
+									this={flexRender(header.column.columnDef.header, header.getContext())}
 								/>
-							</svg>
-						</a>
-					{/if}
-				</td>
-			</tr>
-		{/each}
-	</tbody>
-</table>
+							{/if}
+						</th>
+					{/each}
+					<th class="px-4 py-2" />
+				</tr>
+			{/each}
+		</thead>
+		<tbody>
+			{#each $table.getRowModel().rows as row}
+				<tr class="hover:bg-stone-100">
+					{#each row.getVisibleCells() as cell}
+						<td class="px-4 py-2 text-left">
+							{#if cell.column.id === 'name' && products[row.index].thumbnail}
+								<img
+									src={products[row.index].thumbnail}
+									alt="product thumbnail"
+									class="w-12 h-12 rounded-full border-2 inline-block mr-2 object-contain"
+								/>
+							{/if}
+							<svelte:component this={flexRender(cell.column.columnDef.cell, cell.getContext())} />
+						</td>
+					{/each}
+					<td class="px-4 py-2">
+						{#if isDemoProduct(row.getValue('productId'))}
+							<a
+								href={`/dashboard/products/${row.getValue('productId')}`}
+								class="inline-block rounded border border-transparent hover:border-gray-200 hover:shadow-sm p-1"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="w-5 h-5"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+									/>
+								</svg>
+							</a>
+						{/if}
+					</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
+</div>
 
 <Pagination {table} {options} />
