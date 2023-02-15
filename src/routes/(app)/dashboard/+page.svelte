@@ -4,7 +4,6 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 	const { products } = data;
-	console.log(products);
 </script>
 
 <div class="space-y-8">
@@ -13,7 +12,7 @@
 		just some stats about this manufacturing plant
 	</div>
 
-	<div class="bg-white border rounded-md shadow-sm p-6 space-y-4">
+	<div class="bg-white border rounded-md shadow-sm p-6">
 		<Table {products} />
 	</div>
 </div>

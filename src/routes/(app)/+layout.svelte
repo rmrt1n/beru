@@ -1,9 +1,6 @@
 <script>
 	import '../../app.postcss';
 	import Navbar from '$lib/components/dashboard/Navbar.svelte';
-
-	/** @type {import('./$types').LayoutData} */
-	export let data;
 </script>
 
 <Navbar />

@@ -14,6 +14,9 @@ export const load = async ({ params, locals }) => {
 			manufacture_cost, batch_number, direct_emissions,
 			components (
 				component_id, name, cost,
+				product_components (
+					percent_weight
+				),
 				suppliers (
 					supplier_id, name, email, phone, address
 				),
@@ -38,13 +41,15 @@ export const load = async ({ params, locals }) => {
 
 	const { data: rawEmissions, error: err2 } = await locals.sb
 		.from('emissions')
-		.select(`
+		.select(
+			`
 			emission_id, emission_value, stage,
 			components (
 				component_id, name
 			)
-		`)
-		.eq('product_id', productId)
+		`
+		)
+		.eq('product_id', productId);
 
 	if (err2) {
 		console.log(err);
@@ -70,16 +75,15 @@ export const load = async ({ params, locals }) => {
 		})
 	);
 
-	console.log(rawEmissions)
 	/** @type {import('$lib/types').Emission} */
 	const emissions = rawEmissions.reduce((acc, e) => {
 		acc[e.components.name] = acc[e.components.name] || { totalEmission: 0, emissions: [] };
 		acc[e.components.name].totalEmission += e.emission_value;
-		acc[e.components.name].emissions.push({ 
+		acc[e.components.name].emissions.push({
 			emissionId: e.emission_id,
 			emissionValue: e.emission_value,
 			stage: e.stage,
-			component: e.components,
+			component: e.components
 		});
 		return acc;
 	}, Object.create(null));

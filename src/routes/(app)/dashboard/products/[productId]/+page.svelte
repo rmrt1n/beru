@@ -9,13 +9,13 @@
 	let show = false;
 </script>
 
-<div class="space-y-8">
+<div class="space-y-4">
 	<h1 class="text-2xl font-bold">{product.name}</h1>
 	<div class="flex flex-col lg:flex-row gap-6">
 		<div class="bg-white border rounded-md shadow-sm p-4 w-full">
 			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md" />
 		</div>
-		<div class="bg-white border rounded-md shadow-sm p-4 space-y-4 w-full">
+		<div class="bg-white border rounded-md shadow-sm p-4 space-y-2 w-full">
 			<h3 class="text-lg font-bold">Product details</h3>
 
 			<div class="space-y-1">
@@ -29,7 +29,10 @@
 			</div>
 
 			<div class="flex flex-col md:flex-row gap-4">
-				<button on:click={() => show = !show} class="w-full px-4 py-1 border rounded-md shadow-sm flex items-center gap-2 text-left">
+				<button
+					on:click={() => (show = !show)}
+					class="w-full px-4 py-1 border rounded-md shadow-sm flex items-center gap-2 text-left"
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -72,8 +75,8 @@
 		</div>
 	</div>
 	<h2 class="text-xl font-bold">Product insights</h2>
-	<h2 class="text-xl font-bold">Components breakdown</h2>
-	<div class="bg-white border rounded-md shadow-sm p-6 space-y-4 w-full">
+	<div class="bg-white border rounded-md shadow-sm p-4 space-y-2 w-full">
+		<h2 class="text-xl font-bold">Components breakdown</h2>
 		<ComponentsTable components={product.components} {emissions} />
 	</div>
 	<h2 class="text-xl font-bold">Compare previous batches</h2>

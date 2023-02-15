@@ -63,7 +63,11 @@
 					class="z-10 absolute right-0 top-[calc(100%+.25rem)] bg-white divide-y divide-gray-100 border rounded-md shadow-md w-44"
 					class:hidden={!isProfileOpen}
 				>
-					<ul class="py-2 text-sm" on:click={() => (isProfileOpen = false)}>
+					<ul
+						on:click={() => (isProfileOpen = false)}
+						on:keypress={() => (isProfileOpen = false)}
+						class="py-2 text-sm"
+					>
 						<li>
 							<a href="/profile" class="block px-4 py-2 hover:bg-stone-100">Your profile</a>
 						</li>

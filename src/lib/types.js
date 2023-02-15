@@ -19,6 +19,7 @@
  *   componentId: number;
  *   name: string;
  *   cost: number;
+ *   percentWeight: number | null;
  *   supplier: Supplier | null;
  *   material: Material | null;
  * }} Component
@@ -46,15 +47,15 @@
  *   [componentName: string]: {
  *	   totalEmission: number;
  *	   emissions: {
-	 *		 emissionId: number;
-	 *		 emissionValue: number;
-	 *		 stage: string;
-	 *		 component: {
-	 *		   componentId: number;
-	 *		   name: number;
-	 *		 };
-	 *   }[];
-	 * }
+ *		 emissionId: number;
+ *		 emissionValue: number;
+ *		 stage: string;
+ *		 component: {
+ *		   componentId: number;
+ *		   name: number;
+ *		 };
+ *   }[];
+ * }
  * }} Emission
  */
 
@@ -68,11 +69,13 @@ const fmtMaterial = ({
 
 export const fmtComponent = ({
 	component_id: componentId,
+	product_components: pc,
 	suppliers: s,
 	materials: m,
 	...rest
 }) => ({
 	componentId,
+	percentWeight: pc[0].percent_weight,
 	...rest,
 	supplier: fmtSupplier(s),
 	material: m ? fmtMaterial(m) : null
