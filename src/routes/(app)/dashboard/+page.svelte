@@ -1,5 +1,5 @@
 <script>
-	import Table from '$lib/components/dashboard/Table.svelte';
+	import Table from '$lib/components/app/Table.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -7,12 +7,10 @@
 </script>
 
 <div class="space-y-8">
-	<h1 class="text-2xl font-bold">Schaan, Liechtenstein</h1>
-	<div class="flex h-24 gap-8 border rounded-md bg-white shadow-sm p-4">
-		just some stats about this manufacturing plant
-	</div>
+	<h1 class="text-2xl font-bold">Welcome, {data.session?.user.email}</h1>
 
 	<div class="bg-white border rounded-md shadow-sm p-6">
+		<h2 class="text-xl font-bold">Products List</h2>
 		<Table {products} />
 	</div>
 </div>

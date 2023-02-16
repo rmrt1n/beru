@@ -1,10 +1,13 @@
 <script>
+	import { enhance } from '$app/forms';
 	import supabase from '$lib/supabase';
 
 	let loading = false;
 	let email = '';
+	let submitted = false;
 
-	const handleLogin = async () => {
+	/** @type {import('$app/forms').SubmitFunction} */
+	const signIn = async ({ cancel }) => {
 		try {
 			loading = true;
 			const { error } = await supabase.auth.signInWithOtp({
@@ -20,23 +23,55 @@
 		} finally {
 			loading = false;
 		}
+		submitted = true;
+		cancel();
 	};
 </script>
 
-<form method="POST" on:submit|preventDefault={handleLogin}>
-	<div class="col-6 form-widget">
-		<h1 class="header">Supabase + SvelteKit</h1>
-		<p class="description">Sign in via magic link with your email below</p>
-		<div>
-			<input class="inputField" type="email" placeholder="Your email" bind:value={email} />
-		</div>
-		<div>
-			<input
+<div class="max-w-md mx-auto bg-white border rounded-md shadow-md mt-6">
+	<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+		<h1 class="font-display font-semibold text-2xl sm:text-3xl">Sign in to your account</h1>
+		<form method="POST" use:enhance={signIn} class="space-y-4 md:space-y-6">
+			<div>
+				<label for="email" class="block mb-2 text-sm font-medium">Your email</label>
+				<input
+					required
+					type="email"
+					name="email"
+					id="email"
+					class="px-4 py-1 w-full border rounded bg-stone-50"
+					placeholder="name@company.com"
+					bind:value={email}
+				/>
+			</div>
+			<button
 				type="submit"
-				class="button block"
-				value={loading ? 'Loading' : 'Send magic link'}
-				disabled={loading}
-			/>
-		</div>
+				disabled={submitted}
+				class="px-4 py-1 border rounded shadow-sm bg-blue-700 border-blue-700 text-white w-full font-medium text-center disabled:opacity-60"
+			>
+				{#if !loading}
+					Sign in with email
+				{:else}
+					<div class="flex items-center gap-2 justify-center">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-5 h-5 animate-spin"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+							/>
+						</svg>
+						Loading...
+					</div>
+				{/if}
+			</button>
+		</form>
 	</div>
-</form>
+</div>
+<!-- </div> -->

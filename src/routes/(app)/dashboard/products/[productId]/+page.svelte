@@ -1,6 +1,7 @@
 <script>
-	import ComponentsTable from '$lib/components/dashboard/ComponentsTable.svelte';
-	import ELiabilityStatement from '$lib/components/dashboard/ELiabilityStatement.svelte';
+	import ComponentsTable from '$lib/components/app/ComponentsTable.svelte';
+	import ELiabilityStatement from '$lib/components/app/ELiabilityStatement.svelte';
+	import UnderConstruction from '$lib/components/UnderConstruction.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -16,16 +17,16 @@
 			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md" />
 		</div>
 		<div class="bg-white border rounded-md shadow-sm p-4 space-y-2 w-full">
-			<h3 class="text-lg font-bold">Product details</h3>
+			<h3 class="text-xl font-bold">Product details</h3>
 
 			<div class="space-y-1">
-				<p>Product ID: {product.productId}</p>
+				<p>Product ID: #{product.productId}</p>
 				<p>Name: {product.name}</p>
 				<p>Type: {product.type}</p>
-				<p>Weight: {product.weight}</p>
-				<p>Price: {product.price}</p>
-				<p>Manufacturing cost: {product.manufactureCost}</p>
-				<p>Batch number: {product.batchNumber}</p>
+				<p>Weight: {product.weight} kg</p>
+				<p>Price: {product.price} USD</p>
+				<p>Manufacturing cost: {product.manufactureCost} USD</p>
+				<p>Batch number: #{product.batchNumber}</p>
 			</div>
 
 			<div class="flex flex-col md:flex-row gap-4">
@@ -74,12 +75,11 @@
 			</div>
 		</div>
 	</div>
-	<h2 class="text-xl font-bold">Product insights</h2>
 	<div class="bg-white border rounded-md shadow-sm p-4 space-y-2 w-full">
-		<h2 class="text-xl font-bold">Components breakdown</h2>
+		<!-- <h2 class="text-xl font-bold">Components breakdown</h2> -->
 		<ComponentsTable components={product.components} {emissions} />
 	</div>
-	<h2 class="text-xl font-bold">Compare previous batches</h2>
+	<UnderConstruction />
 </div>
 
 <ELiabilityStatement bind:show {product} {emissions} />

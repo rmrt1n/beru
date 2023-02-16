@@ -1,4 +1,6 @@
 <script>
+	import UnderConstruction from '$lib/components/UnderConstruction.svelte';
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 
@@ -24,7 +26,6 @@
 			acc[i].selectedComponent = acc[i].productComponent;
 			return acc;
 		}, Object.create(null));
-	console.log('babi', componentsOptions['Springs']);
 
 	const originalCost =
 		product.manufactureCost + product.components?.reduce((acc, c) => acc + c.cost, 0);
@@ -52,13 +53,8 @@
 
 	const getEmission = (c) => {
 		if (c.material?.emissionFactorUnit === 'kgCO2e/kg') {
-			console.log('material', c.material.name, c);
 			const percentWeight =
 				c.percentWeight ?? product.components.filter((pc) => pc.name === c.name)[0].percentWeight;
-			console.log(
-				percentWeight,
-				((product.weight * percentWeight) / 100) * c.material.emissionFactor
-			);
 			return ((product.weight * percentWeight) / 100) * c.material.emissionFactor;
 		}
 	};
@@ -85,76 +81,79 @@
 				/>
 			</svg>
 		</a>
-		<h1 class="text-2xl font-bold">{product.name}</h1>
+		<h1 class="text-2xl font-bold">{product.name} Optimization</h1>
 	</div>
 
 	<div class="flex flex-col lg:flex-row gap-6">
 		<div class="bg-white border rounded-md shadow-sm p-4 w-full">
 			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md" />
 		</div>
-		<div class="bg-white border rounded-md shadow-sm p-4 w-full flex flex-col">
-			<div class="h-full space-y-2">
-				<h2 class="text-xl md:text-2xl font-bold">Updated Cost</h2>
-				<div class="flex items-center gap-2">
-					<p class="text-xl md:text-2xl lg:text-3xl">
-						{product.manufactureCost + product.components.reduce((acc, c) => acc + c.cost, 0)}
-					</p>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="2"
-						stroke="currentColor"
-						class="w-8 h-8"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-						/>
-					</svg>
-					<p
-						class="text-xl md:text-2xl lg:text-3xl font-bold"
-						class:text-red-500={originalCost < updatedCost}
-						class:text-green-500={originalCost > updatedCost}
-					>
-						{updatedCost}
-						{originalCost < updatedCost ? `(+${updatedCost - originalCost})` : ''}
-						{originalCost > updatedCost ? `(-${originalCost - updatedCost})` : ''}
-					</p>
+		<div
+			class="bg-white border rounded-md shadow-sm p-4 w-full flex flex-col justify-between gap-2"
+		>
+			<h2 class="text-xl font-bold">Cost & footprint engineering</h2>
+			<div class="space-y-2">
+				<div>
+					<p>Updated Cost (in USD)</p>
+					<div class="flex items-center gap-2 text-xl md:text-2xl lg:text-3xl">
+						<p>
+							{product.manufactureCost + product.components.reduce((acc, c) => acc + c.cost, 0)}
+						</p>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							class="w-8 h-8"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+							/>
+						</svg>
+						<p
+							class:text-red-500={originalCost < updatedCost}
+							class:text-green-500={originalCost > updatedCost}
+						>
+							<strong>{updatedCost}</strong>
+							{originalCost < updatedCost ? `(+${updatedCost - originalCost})` : ''}
+							{originalCost > updatedCost ? `(-${originalCost - updatedCost})` : ''}
+						</p>
+					</div>
 				</div>
-			</div>
-			<div class="h-full space-y-2">
-				<h2 class="text-xl md:text-2xl font-bold">Updated Carbon Footprint</h2>
-				<div class="flex items-center gap-2">
-					<p class="text-xl md:text-2xl lg:text-3xl">{totalEmission.toLocaleString()}</p>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="2"
-						stroke="currentColor"
-						class="w-8 h-8"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-						/>
-					</svg>
-					<p
-						class="text-xl md:text-2xl lg:text-3xl font-bold"
-						class:text-red-500={totalEmission < updatedEmission}
-						class:text-green-500={totalEmission > updatedEmission}
-					>
-						{updatedEmission.toLocaleString()}
-						{totalEmission < updatedEmission
-							? `(+${(updatedEmission - totalEmission).toLocaleString()})`
-							: ''}
-						{totalEmission > updatedEmission
-							? `(-${(totalEmission - updatedEmission).toLocaleString()})`
-							: ''}
-					</p>
+				<div>
+					<h2>Updated Carbon Footprint (in kgCO2e)</h2>
+					<div class="flex items-center gap-2 text-xl md:text-2xl lg:text-3xl">
+						<p>{totalEmission.toLocaleString()}</p>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							class="w-8 h-8"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+							/>
+						</svg>
+						<p
+							class:text-red-500={totalEmission < updatedEmission}
+							class:text-green-500={totalEmission > updatedEmission}
+						>
+							<strong>{updatedEmission.toLocaleString()}</strong>
+							{totalEmission < updatedEmission
+								? `(+${(updatedEmission - totalEmission).toLocaleString()})`
+								: ''}
+							{totalEmission > updatedEmission
+								? `(-${(totalEmission - updatedEmission).toLocaleString()})`
+								: ''}
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -162,13 +161,12 @@
 
 	<div class="bg-white border rounded-md shadow-sm p-4 space-y-2 w-full">
 		<h2 class="text-xl font-bold">Component suppliers</h2>
-		<ol class="list-decimal">
+		<ol class="list-decimal space-y-2">
 			{#each Object.keys(componentsOptions) as i}
 				<li class="ml-4">
 					<div class="flex flex-col md:flex-row md:gap-4 md:items-center">
-						<p>{i}</p>
+						<p class="lg:min-w-[12rem]">{i}</p>
 						<select
-							value={componentsOptions[i].selectedComponent.name}
 							on:change={(e) => {
 								componentsOptions[i].selectedComponent = componentsOptions[i].components.filter(
 									(c) => c.supplier.supplierId === Number(e.target.value)
@@ -183,62 +181,61 @@
 							{/each}
 						</select>
 
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							class="w-5 h-5"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-
-						<p
-							class:text-red-500={componentsOptions[i].productComponent.cost -
-								componentsOptions[i].selectedComponent.cost <
-								0}
-							class:text-green-500={componentsOptions[i].productComponent.cost -
-								componentsOptions[i].selectedComponent.cost >
-								0}
-						>
-							{componentsOptions[i].productComponent.cost -
-								componentsOptions[i].selectedComponent.cost <=
-							0
-								? '+'
-								: '-'}
-							{Math.abs(
-								componentsOptions[i].productComponent.cost -
-									componentsOptions[i].selectedComponent.cost
-							).toLocaleString()} USD
-						</p>
-						<p
-							class:text-red-500={getEmission(componentsOptions[i].productComponent) -
-								getEmission(componentsOptions[i].selectedComponent) <
-								0}
-							class:text-green-500={getEmission(componentsOptions[i].productComponent) -
-								getEmission(componentsOptions[i].selectedComponent) >
-								0}
-						>
-							{getEmission(componentsOptions[i].productComponent) -
-								getEmission(componentsOptions[i].selectedComponent) <=
-							0
-								? '+'
-								: '-'}
-							{Math.abs(
-								getEmission(componentsOptions[i].productComponent) -
-									getEmission(componentsOptions[i].selectedComponent)
-							).toLocaleString()} kgCO2e
-						</p>
+						<div class="flex gap-4 items-center flex-wrap">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								class="w-5 h-5"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+							<span
+								class:text-red-500={componentsOptions[i].productComponent.cost -
+									componentsOptions[i].selectedComponent.cost <
+									0}
+								class:text-green-500={componentsOptions[i].productComponent.cost -
+									componentsOptions[i].selectedComponent.cost >
+									0}
+							>
+								{componentsOptions[i].productComponent.cost -
+									componentsOptions[i].selectedComponent.cost <=
+								0
+									? '+'
+									: '-'}
+								{Math.abs(
+									componentsOptions[i].productComponent.cost -
+										componentsOptions[i].selectedComponent.cost
+								).toLocaleString()} USD
+							</span>
+							<span
+								class:text-red-500={getEmission(componentsOptions[i].productComponent) -
+									getEmission(componentsOptions[i].selectedComponent) <
+									0}
+								class:text-green-500={getEmission(componentsOptions[i].productComponent) -
+									getEmission(componentsOptions[i].selectedComponent) >
+									0}
+							>
+								{getEmission(componentsOptions[i].productComponent) -
+									getEmission(componentsOptions[i].selectedComponent) <=
+								0
+									? '+'
+									: '-'}
+								{Math.abs(
+									getEmission(componentsOptions[i].productComponent) -
+										getEmission(componentsOptions[i].selectedComponent)
+								).toLocaleString()} kgCO2e
+							</span>
+						</div>
 					</div>
 				</li>
 			{/each}
 		</ol>
 	</div>
 
-	<div class="bg-white border rounded-md shadow-sm p-4 space-y-2 w-full">
-		<h2 class="text-xl font-bold">Packaging</h2>
-	</div>
+	<UnderConstruction />
 </div>

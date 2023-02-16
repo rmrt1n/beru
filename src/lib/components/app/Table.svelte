@@ -81,7 +81,7 @@
 			</svg>
 			<input
 				bind:value={globalFilter}
-				class="px-4 pl-11 py-1 border rounded"
+				class="px-4 pl-11 py-1 border rounded bg-stone-50"
 				placeholder="search"
 			/>
 		</div>

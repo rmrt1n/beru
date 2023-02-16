@@ -17,7 +17,6 @@
 	const deltaEliability = totalEmission - openingEliability;
 
 	let showDetails = false;
-	console.log(emissions);
 </script>
 
 {#if show}

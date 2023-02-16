@@ -2,7 +2,12 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+				display: ['Clash Display', 'system-ui', 'sans-serif']
+			}
+		}
 	},
 
 	plugins: []

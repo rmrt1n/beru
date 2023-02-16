@@ -10,7 +10,7 @@
 
 	import { fuzzyFilter } from '$lib/table';
 	import Pagination from './Pagination.svelte';
-	import ComponentEliabilityStatement from '$lib/components/dashboard/ComponentEliabilityStatement.svelte';
+	import ComponentEliabilityStatement from './ComponentEliabilityStatement.svelte';
 
 	/**
 	 * @typedef {import('$lib/types').Component} Component
@@ -64,7 +64,8 @@
 </script>
 
 <div class="space-y-4">
-	<div class="flex justify-end gap-2 flex-wrap">
+	<div class="flex justify-between gap-2 flex-wrap">
+		<h2 class="text-xl font-bold">Components breakdown</h2>
 		<div class="relative">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +81,7 @@
 			</svg>
 			<input
 				bind:value={globalFilter}
-				class="px-4 pl-11 py-1 border rounded"
+				class="px-4 pl-11 py-1 border rounded bg-stone-50"
 				placeholder="search"
 			/>
 		</div>

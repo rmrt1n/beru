@@ -5,7 +5,7 @@ export const actions = {
 	default: async ({ request, locals }) => {
 		const body = Object.fromEntries(await request.formData());
 
-		const { data, error: err } = await locals.sb.auth.signInWithOtp({
+		const { error: err } = await locals.sb.auth.signInWithOtp({
 			email: /** @type {string} */ (body.email),
 			options: { emailRedirectTo: '/dashboard' }
 		});
@@ -20,8 +20,6 @@ export const actions = {
 				error: 'error: server error'
 			});
 		}
-
-		console.log('testing', data);
 
 		throw redirect(303, '/dashboard');
 	}
