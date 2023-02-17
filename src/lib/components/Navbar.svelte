@@ -1,5 +1,5 @@
 <script>
-	let isOpen = true;
+	let isOpen = false;
 </script>
 
 <header class="border">
@@ -16,7 +16,7 @@
 			</div>
 		</nav>
 		<nav class="hidden md:flex gap-3 font-medium text-lg">
-			<a href="/sign-in" class="px-4 py-1 border rounded shadow-sm flex items-center gap-2">
+			<a href="/dashboard" class="px-4 py-1 border rounded shadow-sm flex items-center gap-2">
 				Sign in
 			</a>
 			<a
@@ -62,7 +62,7 @@
 	<a href="/#faq" class="px-4 py-1 hover:bg-stone-100">FAQs</a>
 	<a href="/about" class="px-4 py-1 hover:bg-stone-100">About</a>
 	<a href="mailto:hi@ryanmartin.me" class="px-4 py-1 hover:bg-stone-100">Contact</a>
-	<a href="/sign-in" class="px-4 py-1 border rounded shadow-sm flex items-center gap-2">
+	<a href="/dashboard" class="px-4 py-1 border rounded shadow-sm flex items-center gap-2">
 		Sign in
 	</a>
 	<a

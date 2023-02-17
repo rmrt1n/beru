@@ -14,7 +14,7 @@
 	<h1 class="text-2xl font-bold">{product.name}</h1>
 	<div class="flex flex-col lg:flex-row gap-6">
 		<div class="bg-white border rounded-md shadow-sm p-4 w-full">
-			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md" />
+			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md lg:mx-auto" />
 		</div>
 		<div class="bg-white border rounded-md shadow-sm p-4 space-y-2 w-full">
 			<h3 class="text-xl font-bold">Product details</h3>

@@ -167,7 +167,7 @@
 				<div
 					on:click={() => (f.isOpen = !f.isOpen)}
 					on:keypress={() => (f.isOpen = !f.isOpen)}
-					class="py-4 border-b hover:cursor-pointer flex items-center justify-between"
+					class="py-4 border-b hover:cursor-pointer flex items-center justify-between text-left"
 				>
 					{f.question}
 					{#if f.isOpen}
@@ -199,7 +199,7 @@
 					{/if}
 				</div>
 				{#if f.isOpen}
-					<div transition:slide={{ duration: 150 }} class="py-4 border-b">
+					<div transition:slide={{ duration: 150 }} class="py-4 border-b text-left">
 						{f.answer}
 					</div>
 				{/if}

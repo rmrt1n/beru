@@ -86,7 +86,7 @@
 
 	<div class="flex flex-col lg:flex-row gap-6">
 		<div class="bg-white border rounded-md shadow-sm p-4 w-full">
-			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md" />
+			<img src={product.thumbnail} alt="product thumbnail" class="w-full lg:max-w-md lg:mx-auto" />
 		</div>
 		<div
 			class="bg-white border rounded-md shadow-sm p-4 w-full flex flex-col justify-between gap-2"
