@@ -18,7 +18,7 @@
 
 	/** @type {Component[] | null} */
 	export let components;
-	/** @type {import('$lib/types').Emission} */
+	/** @type {import('$lib/types').EmissionLookup} */
 	export let emissions;
 
 	let lookupShow = Object.keys(emissions).map(() => false);
@@ -50,6 +50,7 @@
 	let globalFilter = '';
 	$: options.update((old) => ({ ...old, state: { ...old.state, globalFilter } }));
 
+	// @ts-ignore not sure how to fix this :(
 	const options = writable({
 		data: components,
 		columns: columns,

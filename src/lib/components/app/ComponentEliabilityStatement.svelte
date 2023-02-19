@@ -2,7 +2,11 @@
 	import { fade, slide } from 'svelte/transition';
 
 	export let show = false;
+
+	/** @type {import('$lib/types').Emission} */
 	export let emissions;
+
+	/** @type {string} */
 	export let componentName;
 
 	const openingEliability = 0; // TODO: research where to get this

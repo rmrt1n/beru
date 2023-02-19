@@ -2,6 +2,8 @@ import { error } from '@sveltejs/kit';
 
 import { fmtComponent } from '$lib/types';
 
+/** @typedef {import('$lib/types').Component} Component */
+
 /** @type {import('./$types').LayoutServerLoad} */
 export const load = async ({ params, locals }) => {
 	const { productId } = params;
@@ -56,30 +58,32 @@ export const load = async ({ params, locals }) => {
 		throw error(500, 'error: database error');
 	}
 
-	/** @type {import('$lib/types').Product[]} */
-	const products = data.map(
-		({
-			product_id: productId,
-			manufacture_cost: manufactureCost,
-			batch_number: batchNumber,
-			direct_emissions: directEmissions,
-			components: c,
-			...rest
-		}) => ({
-			productId,
-			manufactureCost,
-			batchNumber,
-			directEmissions,
-			components: c.map(fmtComponent),
-			...rest
-		})
+	const products = /** @type {import('$lib/types').Product[]} */ (
+		data.map(
+			({
+				product_id: productId,
+				manufacture_cost: manufactureCost,
+				batch_number: batchNumber,
+				direct_emissions: directEmissions,
+				components: c,
+				...rest
+			}) => ({
+				productId,
+				manufactureCost,
+				batchNumber,
+				directEmissions,
+				components: /** @type {Component[]} */ (/** @type {?} */ (c))?.map(fmtComponent),
+				...rest
+			})
+		)
 	);
 
-	/** @type {import('$lib/types').Emission} */
+	/** type(import('$lib/types').EmissionLookup) */
 	const emissions = rawEmissions.reduce((acc, e) => {
-		acc[e.components.name] = acc[e.components.name] || { totalEmission: 0, emissions: [] };
-		acc[e.components.name].totalEmission += e.emission_value;
-		acc[e.components.name].emissions.push({
+		const { name } = /** @type {Component} */ (/** @type {?} */ (e.components));
+		acc[name] = acc[name] || { totalEmission: 0, emissions: [] };
+		acc[name].totalEmission += e.emission_value;
+		acc[name].emissions.push({
 			emissionId: e.emission_id,
 			emissionValue: e.emission_value,
 			stage: e.stage,

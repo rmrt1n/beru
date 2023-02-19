@@ -2,7 +2,7 @@
 	import { fade, slide } from 'svelte/transition';
 
 	export let show = false;
-	/** @type {import('$lib/types').Emission} */
+	/** @type {import('$lib/types').EmissionLookup} */
 	export let emissions;
 	/** @type {import('$lib/types').Product} */
 	export let product;

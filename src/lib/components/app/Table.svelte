@@ -36,7 +36,7 @@
 			cell: (info) => info.getValue()
 		},
 		{
-			accessorFn: (p) => p.manufacturingPlant.plantName,
+			accessorFn: (p) => p.manufacturingPlant?.plantName,
 			header: 'Manufacturing plant',
 			cell: (info) => info.getValue()
 		}
@@ -55,6 +55,7 @@
 		getPaginationRowModel: getPaginationRowModel()
 	});
 
+	// @ts-ignore not sure how to fix this :(
 	const table = createSvelteTable(options);
 
 	const demoProducts = [1];

@@ -20,7 +20,7 @@
  *   name: string;
  *   cost: number;
  *   percentWeight: number | null;
- *   supplier: Supplier | null;
+ *   supplier: Supplier;
  *   material: Material | null;
  * }} Component
  *
@@ -40,13 +40,12 @@
  *   batchNumber: number;
  *   directEmissions: number;
  *   manufacturingPlant: ManufacturingPlant | null;
- *   components: Component[] | null;
+ *   components: Component[];
  * }} Product
  *
  * @typedef {{
- *   [componentName: string]: {
- *	   totalEmission: number;
- *	   emissions: {
+ *	 totalEmission: number;
+ *	 emissions: {
  *		 emissionId: number;
  *		 emissionValue: number;
  *		 stage: string;
@@ -54,12 +53,30 @@
  *		   componentId: number;
  *		   name: number;
  *		 };
- *   }[];
- * }
+ *	}[];
  * }} Emission
+ *
+ * @typedef {{
+ *   [componentName: string]: Emission
+ * }} EmissionLookup
  */
 
+/**
+ * @param {{
+ *	 supplier_id: number;
+ * }} rawSupplier
+ * @returns Supplier
+ */
 const fmtSupplier = ({ supplier_id: supplierId, ...rest }) => ({ supplierId, ...rest });
+
+/**
+ * @param {{
+ *	 material_id: number;
+ *		 emission_factor: number;
+ *		 emission_factor_unit: number;
+ * }} rawMaterial
+ * @returns Material
+ */
 const fmtMaterial = ({
 	material_id: materialId,
 	emission_factor: emissionFactor,
@@ -67,6 +84,23 @@ const fmtMaterial = ({
 	...rest
 }) => ({ materialId, emissionFactor, emissionFactorUnit, ...rest });
 
+/**
+ * @param {{
+ *	 component_id: number;
+ *	 product_components: {
+ *	   percent_weight: number;
+ *	 }[];
+ *	 suppliers: {
+ *		 supplier_id: number;
+ *	 };
+ *	 materials: {
+ *		 material_id: number;
+ *		 emission_factor: number;
+ *		 emission_factor_unit: number;
+ *	 }
+ * }} rawComponent
+ * @returns Component
+ */
 export const fmtComponent = ({
 	component_id: componentId,
 	product_components: pc,
@@ -80,3 +114,5 @@ export const fmtComponent = ({
 	supplier: fmtSupplier(s),
 	material: m ? fmtMaterial(m) : null
 });
+
+export {};

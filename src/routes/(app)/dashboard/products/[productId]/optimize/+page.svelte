@@ -1,13 +1,18 @@
 <script>
 	import UnderConstruction from '$lib/components/UnderConstruction.svelte';
 
+	/** @typedef {import('$lib/types').Emission} Emission */
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 
 	const { product, emissions, components } = data;
 
 	const supplierEmission = Object.keys(emissions).reduce(
-		(acc, i) => acc + emissions[i].totalEmission,
+		(acc, i) =>
+			acc +
+			/** @type {Emission} */ (/** @type {?} */ (emissions[/** @type {keyof Emission} */ (i)]))
+				.totalEmission,
 		0
 	);
 	const totalEmission = product.directEmissions + supplierEmission;
@@ -17,15 +22,32 @@
 		acc[e.name].push(e);
 		return acc;
 	}, Object.create(null));
+
 	let componentsOptions = Object.keys(map)
 		.filter((i) => map[i].length > 1)
 		.reduce((acc, i) => {
 			acc[i] = acc[i] || {};
 			acc[i].components = map[i];
-			acc[i].productComponent = product.components?.filter((c) => c.name === i)[0];
+			acc[i].productComponent = product.components.filter((c) => c.name === i)[0];
 			acc[i].selectedComponent = acc[i].productComponent;
 			return acc;
 		}, Object.create(null));
+
+	/**
+	 * @param {import('$lib/types').Component} c
+	 * @returns number
+	 */
+	const getEmission = (c) => {
+		// return 1 just to satisfy typescript, for now there is  no cases where
+		// there is no c.material. need to update accordingly in the future
+		if (!c.material) return 0;
+		if (c.material.emissionFactorUnit === 'kgCO2e/kg') {
+			const percentWeight =
+				c.percentWeight ?? product.components.filter((pc) => pc.name === c.name)[0].percentWeight;
+			return ((product.weight * (percentWeight ?? 0.5)) / 100) * c.material.emissionFactor;
+		}
+		return 0;
+	};
 
 	const originalCost =
 		product.manufactureCost + product.components?.reduce((acc, c) => acc + c.cost, 0);
@@ -50,14 +72,6 @@
 					getEmission(componentsOptions[i].selectedComponent)
 			)
 			.reduce((acc, c) => acc + c, 0);
-
-	const getEmission = (c) => {
-		if (c.material?.emissionFactorUnit === 'kgCO2e/kg') {
-			const percentWeight =
-				c.percentWeight ?? product.components.filter((pc) => pc.name === c.name)[0].percentWeight;
-			return ((product.weight * percentWeight) / 100) * c.material.emissionFactor;
-		}
-	};
 </script>
 
 <div class="space-y-4">
@@ -168,9 +182,14 @@
 						<p class="lg:min-w-[12rem]">{i}</p>
 						<select
 							on:change={(e) => {
-								componentsOptions[i].selectedComponent = componentsOptions[i].components.filter(
-									(c) => c.supplier.supplierId === Number(e.target.value)
-								)[0];
+								componentsOptions[i].selectedComponent =
+									/** @type {import('$lib/types').Component[]} */ (
+										componentsOptions[i].components
+									).filter(
+										(c) =>
+											c.supplier.supplierId ===
+											Number(/** @type {HTMLSelectElement} */ (e.target).value)
+									)[0];
 							}}
 							class="px-4 py-1 bg-inherit rounded border shadow-sm hover:cursor-pointer"
 						>
