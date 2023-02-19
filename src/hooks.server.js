@@ -9,7 +9,7 @@ export const handle = async ({ event, resolve }) => {
 	const path = event.url.pathname;
 	// protected paths
 	if (!session && (path.startsWith('/dashboard') || path.startsWith('/profile'))) {
-		throw redirect(303, '/');
+		throw redirect(303, '/sign-in');
 	}
 
 	// redirect from /sign-in if user is already signed in
