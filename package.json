@@ -10,7 +10,9 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"prepare": "husky install",
+		"pre-commit": "lint-staged"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
@@ -19,6 +21,8 @@
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.1.2",
 		"postcss": "^8.4.14",
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.0",
@@ -37,5 +41,12 @@
 		"@supabase/supabase-js": "^2.7.1",
 		"@tanstack/match-sorter-utils": "^8.7.6",
 		"@tanstack/svelte-table": "^8.7.9"
+	},
+	"lint-staged": {
+		"*.{svelte,js,ts}": [
+			"npm run format",
+			"npm run lint",
+			"npm run test:unit"
+		]
 	}
 }
