@@ -30,10 +30,7 @@
 			</div>
 
 			<div class="flex flex-col md:flex-row gap-4">
-				<button
-					on:click={() => (show = !show)}
-					class="w-full px-4 py-1 border rounded-md shadow-sm flex items-center gap-2 text-left"
-				>
+				<button on:click={() => (show = !show)} class="btn w-full">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -53,7 +50,7 @@
 				</button>
 				<a
 					href={`/dashboard/products/${product.productId}/optimize`}
-					class="w-full px-4 py-1 border rounded-md shadow-sm flex items-center gap-2 bg-blue-700 border-blue-700 text-white"
+					class="btn btn-primary w-full"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

@@ -31,11 +31,7 @@
 						placeholder="Your email address"
 					/>
 				</div>
-				<button
-					class="px-4 py-1 border rounded-md shadow-sm bg-blue-700 border-blue-700 text-white flex-shrink-0"
-				>
-					Notify me
-				</button>
+				<button class="btn btn-primary flex-shrink-0"> Notify me </button>
 			</div>
 		</div>
 		<img src="/275-hard-labour.svg" alt="section under construction" class="-m-14 md:m-0 h-64" />

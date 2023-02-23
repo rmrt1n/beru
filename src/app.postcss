@@ -13,3 +13,20 @@
 * {
 	box-sizing: border-box;
 }
+
+@layer components {
+	.btn {
+		@apply px-4 py-1 border border-stone-200 rounded shadow-sm bg-white 
+    inline-flex items-center justify-center gap-2 font-normal text-base hover:bg-stone-100 hover:cursor-pointer
+    active:bg-stone-200 focus-visible:ring focus:ring-blue-700 focus:ring-offset-4
+    disabled:text-stone-400 disabled:hover:bg-white disabled:cursor-not-allowed transition;
+	}
+
+	.btn-primary {
+		@apply bg-blue-700 text-white border-blue-700 hover:bg-blue-800 active:bg-blue-900;
+	}
+
+	.btn-icon {
+		@apply p-1;
+	}
+}

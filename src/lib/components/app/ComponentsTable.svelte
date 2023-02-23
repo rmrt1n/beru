@@ -123,7 +123,7 @@
 							{emissions[row.getValue('name')].totalEmission.toLocaleString()}
 							<button
 								on:click={() => (lookupShow[row.index] = !lookupShow[row.index])}
-								class="inline-block rounded border border-transparent hover:border-gray-200 hover:shadow-sm p-1"
+								class="btn btn-icon"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"

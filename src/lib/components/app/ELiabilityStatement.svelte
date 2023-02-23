@@ -29,10 +29,7 @@
 		>
 			<div class="flex justify-between items-center">
 				<p class="text-xl font-bold">E-Liability Statement</p>
-				<button
-					on:click={() => (show = false)}
-					class="border rounded p-1 disabled:text-stone-400 enabled:hover:bg-stone-100 enabled:active:bg-stone-200"
-				>
+				<button on:click={() => (show = false)} class="btn btn-icon">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -119,11 +116,7 @@
 			</div>
 
 			<div class="flex justify-end gap-3">
-				<button
-					class="px-4 py-1 border rounded shadow-sm bg-blue-700 border-blue-700 text-white font-medium flex items-center gap-2"
-				>
-					Download
-				</button>
+				<button class="btn btn-primary"> Download </button>
 			</div>
 		</div>
 	</div>

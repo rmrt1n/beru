@@ -76,10 +76,7 @@
 
 <div class="space-y-4">
 	<div class="flex items-center gap-2">
-		<a
-			href={`/dashboard/products/${product.productId}`}
-			class="p-1 border rounded-md shadow-sm flex items-center gap-2 text-left bg-white"
-		>
+		<a href={`/dashboard/products/${product.productId}`} class="btn btn-icon">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -191,7 +188,7 @@
 											Number(/** @type {HTMLSelectElement} */ (e.target).value)
 									)[0];
 							}}
-							class="px-4 py-1 bg-inherit rounded border shadow-sm hover:cursor-pointer"
+							class="btn"
 						>
 							{#each componentsOptions[i].components as c}
 								<option value={c.supplier.supplierId}>

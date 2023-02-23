@@ -25,10 +25,7 @@
 		>
 			<div class="flex justify-between items-center">
 				<p class="text-xl font-bold">E-Liability Statement</p>
-				<button
-					on:click={() => (show = false)}
-					class="border rounded p-1 disabled:text-stone-400 enabled:hover:bg-stone-100 enabled:active:bg-stone-200"
-				>
+				<button on:click={() => (show = false)} class="btn btn-icon">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"

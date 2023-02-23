@@ -66,10 +66,7 @@
 		<p class="max-w-3xl mx-auto mt-6 text-xl font-medium">
 			Measure, analyze, and optimize your sustainability efforts with our carbon management software
 		</p>
-		<a
-			href="mailto:hi@ryanmartin.me"
-			class="px-8 py-4 mt-6 border rounded-md shadow-md inline-flex items-center gap-4 font-medium bg-blue-700 border-blue-700 text-white"
-		>
+		<a href="mailto:hi@ryanmartin.me" class="btn btn-primary px-8 py-3 mt-6 font-medium text-lg">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"

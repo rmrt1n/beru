@@ -101,9 +101,7 @@
 					d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
 				/>
 			</svg>
-			<select
-				class="w-full h-full bg-inherit px-4 pl-11 py-1 rounded border shadow-sm hover:cursor-pointer"
-			>
+			<select class="btn h-full pl-11">
 				<option> Schaan, Liechtenstein </option>
 			</select>
 		</div>
@@ -148,7 +146,7 @@
 							{#if isDemoProduct(row.getValue('productId'))}
 								<a
 									href={`/dashboard/products/${row.getValue('productId')}`}
-									class="inline-block rounded border border-transparent hover:border-gray-200 hover:shadow-sm p-1"
+									class="inline-block btn btn-icon"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"

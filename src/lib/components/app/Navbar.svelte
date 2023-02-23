@@ -21,7 +21,7 @@
 			<img src="/logo.png" alt="beru logo" class="h-8" />
 		</a>
 		<nav class="flex gap-3 font-medium text-lg">
-			<button class="px-4 py-1 border rounded shadow-sm flex items-center gap-2">
+			<button class="btn">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -40,10 +40,7 @@
 			</button>
 
 			<div class="relative">
-				<button
-					on:click={() => (isProfileOpen = !isProfileOpen)}
-					class="px-4 py-1 border rounded shadow-sm flex items-center gap-2"
-				>
+				<button on:click={() => (isProfileOpen = !isProfileOpen)} class="btn">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -61,7 +58,7 @@
 					Account
 				</button>
 				<div
-					class="z-10 absolute right-0 top-[calc(100%+.25rem)] bg-white divide-y divide-gray-100 border rounded-md shadow-md w-44"
+					class="z-10 absolute right-0 top-[calc(100%+.25rem)] bg-white divide-y divide-gray-100 border rounded-md shadow-md w-44 font-normal"
 					class:hidden={!isProfileOpen}
 				>
 					<ul
