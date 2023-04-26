@@ -10,18 +10,18 @@ Prototype/PoC of a carbon accounting & management system aimed towards manufactu
 
 ## Features
 ### Component-level footprint analysis
-![Screenshot of dashboard](/screenshots/dashboard.png)
+![Screenshot of dashboard](/screenshots/dashboard.jpg)
 
 Beru aims to facilitate accurate masurement of a product's complete carbon footprint, which is the accumulation of its components' footprints. This enables manufacturers to understand their products better and find ways to reduce their carbon footprints.
 
 ### E-liability accounting
-![Screenshot of e-liability statement](/screenshots/eliability.png)
+![Screenshot of e-liability statement](/screenshots/eliability.jpg)
 
 E-liability accounting is a carbon accounting approach developed by Robert Kaplan & Karthik Ramanna that allows organizations to develop accurate & auditable carbon reports. This prototype aims to explore the feasibility of this approach. Next steps include to implement it using a blockchain platform such as Hyperledger Sawtooth, which would produce transparent and auditable records of transactions.
 
 
 ### Footprint optimization
-![Screenshot of optimiziation page](/screenshots/optimize.png)
+![Screenshot of optimiziation page](/screenshots/optimize.jpg)
 
 Beru provides an experimental dashboard to allow manufacturers to test different combinations of alternative materials or suppliers and see the impacts they have on the price and carbon footprint of a product. One idea in mind for this feature is to create a ML model to find the optimal combination of materials/suppliers that results in the lowest footprint with the lowest increase in manufacturing cost.
 
